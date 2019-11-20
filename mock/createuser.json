@@ -1,0 +1,10 @@
+{
+    "path": "/",
+    "httpMethod": "POST",
+    "queryStringParameters": null,
+    "pathParameters": {
+        "cuid": "51VJX947"
+    },
+    "body": "{\"cid\":\"000004\",\"cuid\":\"8MELOS9Q\",\"eid\":\"EXTERNAL\",\"euid\":\"TYUNHGB3\",\"role\":\"support\",\"user\":{\"firstName\":\"testnameforgrp\",\"lastName\":\"testprimlastname\",\"email\":\"testpriml@gmail.com\",\"phone\":\"998776544\"}}",
+    "isBase64Encoded": false
+}

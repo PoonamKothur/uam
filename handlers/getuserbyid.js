@@ -1,7 +1,7 @@
 const responseHandler = require("../common/responsehandler");
 const BaseHandler = require("../common/basehandler");
 const AWS = require('aws-sdk');
-const documentClient = new AWS.DynamoDB.DocumentClient();
+const cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
 
 class GetUserbyId extends BaseHandler {
     //this is main function
@@ -10,29 +10,40 @@ class GetUserbyId extends BaseHandler {
     }
 
     async getUserByuid(uuid) {
-        const params = {
-            Key:{
-                "uuid" : uuid
-                },
-            TableName: `users-${process.env.STAGE}`
-        };
-        return await documentClient.get(params).promise();
+        var params = {
+            UserPoolId: 'STRING_VALUE', /* required */
+            Username: 'STRING_VALUE' /* required */
+          };
+       let resp = await   cognitoidentityserviceprovider.adminGetUser(params).promise();
+       console.log("get user resp");
+       console.log(resp);
     }
 
     async process(event, context, callback) {
         try {
-       
-            if (event && 'pathParameters' in event && event.pathParameters && 'uuid' in event.pathParameters && event.pathParameters.uuid) {
-                let uuid = event.pathParameters.uuid;
-                let res = await this.getUserByuid(uuid);
-                if (res && 'Item' in res) {
-                    return responseHandler.callbackRespondWithJsonBody(200, res.Item);
-                }
-                return responseHandler.callbackRespondWithSimpleMessage(404, "No user found !");
+            //check for cuid
+            if (!(event && 'pathParameters' in event && event.pathParameters && 'cuid' in event.pathParameters && event.pathParameters.cuid)) {
+                return responseHandler.callbackRespondWithSimpleMessage(400, "Please provide cuid");
             }
-            else{
-                return responseHandler.callbackRespondWithSimpleMessage(400,"Please provide Id");
+
+            //check for poolid
+            if (!(event && 'pathParameters' in event && event.pathParameters && 'poolid' in event.pathParameters && event.pathParameters.poolid)) {
+
+                return responseHandler.callbackRespondWithSimpleMessage(400, "Please provide poolid");
             }
+
+            //check for uuid
+            if (!(event && 'pathParameters' in event && event.pathParameters && 'uuid' in event.pathParameters && event.pathParameters.uuid)) {
+
+                return responseHandler.callbackRespondWithSimpleMessage(400, "Please provide uuid");
+            }
+
+            //get user by id
+            let cuid = event.pathParameters.cuid;
+            let poolid = event.pathParameters.poolid;
+            let uuid = event.pathParameters.uuid;
+
+            let res = await getUserByuid(cuid,poolid,uuid);
         }
 
         catch (err) {

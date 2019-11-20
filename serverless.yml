@@ -29,7 +29,7 @@ functions:
     handler: handlers/getuserbyid.getuser
     events:
       - http:
-          path: uam/{uuid}
+          path: /{cuid}/{poolid}/{uuid}
           method: get
           cors: true
   
