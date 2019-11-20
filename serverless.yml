@@ -1,0 +1,50 @@
+service: cw-uam
+
+stage: ${self:provider.stage}
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  timeout: 30
+  region: ${opt:region, 'ap-south-1'}
+
+  environment: 
+    STAGE: ${opt:stage}
+    
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:CreateTable
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem        
+      Resource: '*'
+
+functions:
+  getuserbyid:
+    handler: handlers/getuserbyid.getuser
+    events:
+      - http:
+          path: uam/{uuid}
+          method: get
+          cors: true
+  
+  createuser:
+    handler: handlers/createuser.createuser
+    events:
+      - http:
+          path: /
+          method: post
+          cors: true
+
+  updateuser:
+    handler: handlers/updateuser.updateuser
+    events:
+      - http:
+          path: uam/{uuid}
+          method: put
+          cors: true
