@@ -1,0 +1,11 @@
+{
+    "path": "/",
+    "httpMethod": "PUT",
+    "queryStringParameters": null,
+    "pathParameters": {
+        "poolid": "ap-south-1_0nyYAuwc6",
+        "uuid": "ZGUHM6T5"
+    },
+    "body": "{\"cid\":\"000004\",\"cuid\":\"8MELOS9Q\",\"eid\":\"EXTERNAL\",\"euid\":\"TYUNHGB3\",\"role\":\"support\",\"user\":{\"firstName\":\"testname\",\"lastName\":\"testlastname\",\"email\":\"testprimlast@gmail.com\",\"phone\":\"+14325551212\"}}",
+    "isBase64Encoded": false
+}

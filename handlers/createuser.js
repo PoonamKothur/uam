@@ -57,11 +57,26 @@ class AddUser extends BaseHandler {
                     Name: 'email', /* required */
                     Value: body.user.email
                 },
-                // { 
-                //     Name: 'phone_number', /* required */   // TODO phone no format
-                //     Value: body.user.phone
-                // },
-                /* more items */
+                { 
+                    Name: 'phone_number', /* required */  
+                    Value: body.user.phone
+                },
+                { 
+                    Name: 'custom:cid', /* required */ 
+                    Value: data.cid
+                },
+                { 
+                    Name: 'custom:cuid', /* required */  
+                    Value: data.cuid
+                },
+                { 
+                    Name: 'custom:euid', /* required */ 
+                    Value: data.euid
+                },
+                { 
+                    Name: 'custom:eid', /* required */  
+                    Value: data.eid
+                },
             ],
         };
         console.log(params);

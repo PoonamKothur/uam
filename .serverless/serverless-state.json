@@ -154,7 +154,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cw-uam/dev/1574236322176-2019-11-20T07:52:02.176Z/cw-uam.zip"
+                "S3Key": "serverless/cw-uam/dev/1574276698438-2019-11-20T19:04:58.438Z/cw-uam.zip"
               },
               "FunctionName": "cw-uam-dev-getuserbyid",
               "Handler": "handlers/getuserbyid.getuser",
@@ -178,14 +178,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "GetuserbyidLambdaVersionMY0y6Jd4XD6naX4KmT5Vyi5ZW82mmsh6nuzJXG1OI": {
+          "GetuserbyidLambdaVersionjhcBA9hlhFOiTnmHL5iJXEZ1WzHjMZ1PGaTVOJ2wAI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetuserbyidLambdaFunction"
               },
-              "CodeSha256": "CbSI/J2Lsc2WUky14ENaSd3hhz0nNI/esLdTd9aB6sY="
+              "CodeSha256": "rGirRgW3OYhjZlNjatfq+R8NlbBqJ+rpER0y+qOxeyE="
             }
           },
           "CreateuserLambdaFunction": {
@@ -195,7 +195,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cw-uam/dev/1574236322176-2019-11-20T07:52:02.176Z/cw-uam.zip"
+                "S3Key": "serverless/cw-uam/dev/1574276698438-2019-11-20T19:04:58.438Z/cw-uam.zip"
               },
               "FunctionName": "cw-uam-dev-createuser",
               "Handler": "handlers/createuser.createuser",
@@ -219,14 +219,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "CreateuserLambdaVersion6BD8cc8ELp219FZXxWZTl57LQsKJc33Giup4YsAdXQ": {
+          "CreateuserLambdaVersionWtKsZodISWXyNj61Z5aqemuPoCr5DxZcZwfzl8nMOys": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateuserLambdaFunction"
               },
-              "CodeSha256": "CbSI/J2Lsc2WUky14ENaSd3hhz0nNI/esLdTd9aB6sY="
+              "CodeSha256": "rGirRgW3OYhjZlNjatfq+R8NlbBqJ+rpER0y+qOxeyE="
             }
           },
           "UpdateuserLambdaFunction": {
@@ -236,7 +236,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/cw-uam/dev/1574236322176-2019-11-20T07:52:02.176Z/cw-uam.zip"
+                "S3Key": "serverless/cw-uam/dev/1574276698438-2019-11-20T19:04:58.438Z/cw-uam.zip"
               },
               "FunctionName": "cw-uam-dev-updateuser",
               "Handler": "handlers/updateuser.updateuser",
@@ -260,14 +260,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "UpdateuserLambdaVersionHH6IaEUxshRDPF6RQ7dShUSEpTz0pJKgQRglkFifWfo": {
+          "UpdateuserLambdaVersionTNMvSpOHhHBwvZnAvDiBIcxHmhhpr3XtQCZYdZh9sU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "UpdateuserLambdaFunction"
               },
-              "CodeSha256": "CbSI/J2Lsc2WUky14ENaSd3hhz0nNI/esLdTd9aB6sY="
+              "CodeSha256": "rGirRgW3OYhjZlNjatfq+R8NlbBqJ+rpER0y+qOxeyE="
             }
           },
           "ApiGatewayRestApi": {
@@ -278,6 +278,45 @@
                 "Types": [
                   "EDGE"
                 ]
+              }
+            }
+          },
+          "ApiGatewayResourceCuidVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "{cuid}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceCuidVarPoolidVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceCuidVar"
+              },
+              "PathPart": "{poolid}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceCuidVarPoolidVarUuidVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceCuidVarPoolidVar"
+              },
+              "PathPart": "{uuid}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
               }
             }
           },
@@ -308,7 +347,7 @@
               }
             }
           },
-          "ApiGatewayMethodUamUuidVarOptions": {
+          "ApiGatewayMethodCuidVarPoolidVarUuidVarOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "AuthorizationType": "NONE",
@@ -338,7 +377,7 @@
                     "ResponseParameters": {
                       "method.response.header.Access-Control-Allow-Origin": "'*'",
                       "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,PUT,GET'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'",
                       "method.response.header.Access-Control-Allow-Credentials": "'false'"
                     },
                     "ResponseTemplates": {
@@ -348,7 +387,7 @@
                 ]
               },
               "ResourceId": {
-                "Ref": "ApiGatewayResourceUamUuidVar"
+                "Ref": "ApiGatewayResourceCuidVarPoolidVarUuidVar"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -405,13 +444,60 @@
               }
             }
           },
-          "ApiGatewayMethodUamUuidVarGet": {
+          "ApiGatewayMethodUamUuidVarOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true,
+                    "method.response.header.Access-Control-Allow-Credentials": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,PUT'",
+                      "method.response.header.Access-Control-Allow-Credentials": "'false'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".*\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceUamUuidVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodCuidVarPoolidVarUuidVarGet": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "GET",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceUamUuidVar"
+                "Ref": "ApiGatewayResourceCuidVarPoolidVarUuidVar"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -537,7 +623,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1574236307062": {
+          "ApiGatewayDeployment1574276691813": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -546,9 +632,10 @@
               "StageName": "dev"
             },
             "DependsOn": [
-              "ApiGatewayMethodUamUuidVarOptions",
+              "ApiGatewayMethodCuidVarPoolidVarUuidVarOptions",
               "ApiGatewayMethodOptions",
-              "ApiGatewayMethodUamUuidVarGet",
+              "ApiGatewayMethodUamUuidVarOptions",
+              "ApiGatewayMethodCuidVarPoolidVarUuidVarGet",
               "ApiGatewayMethodPost",
               "ApiGatewayMethodUamUuidVarPut"
             ]
@@ -674,19 +761,19 @@
           "GetuserbyidLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetuserbyidLambdaVersionMY0y6Jd4XD6naX4KmT5Vyi5ZW82mmsh6nuzJXG1OI"
+              "Ref": "GetuserbyidLambdaVersionjhcBA9hlhFOiTnmHL5iJXEZ1WzHjMZ1PGaTVOJ2wAI"
             }
           },
           "CreateuserLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateuserLambdaVersion6BD8cc8ELp219FZXxWZTl57LQsKJc33Giup4YsAdXQ"
+              "Ref": "CreateuserLambdaVersionWtKsZodISWXyNj61Z5aqemuPoCr5DxZcZwfzl8nMOys"
             }
           },
           "UpdateuserLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdateuserLambdaVersionHH6IaEUxshRDPF6RQ7dShUSEpTz0pJKgQRglkFifWfo"
+              "Ref": "UpdateuserLambdaVersionTNMvSpOHhHBwvZnAvDiBIcxHmhhpr3XtQCZYdZh9sU"
             }
           },
           "ServiceEndpoint": {
@@ -750,7 +837,7 @@
         "events": [
           {
             "http": {
-              "path": "uam/{uuid}",
+              "path": "{cuid}/{poolid}/{uuid}",
               "method": "get",
               "cors": {
                 "origins": [
@@ -862,7 +949,7 @@
     "artifact": "/home/poonam/CodeBlock/Projects/CecureCloud/Code/cecurecloud/uam/.serverless/cw-uam.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/cw-uam/dev/1574236322176-2019-11-20T07:52:02.176Z",
+    "artifactDirectoryName": "serverless/cw-uam/dev/1574276698438-2019-11-20T19:04:58.438Z",
     "artifact": "cw-uam.zip"
   }
 }

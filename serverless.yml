@@ -29,7 +29,7 @@ functions:
     handler: handlers/getuserbyid.getuser
     events:
       - http:
-          path: /{cuid}/{poolid}/{uuid}
+          path: /{poolid}/{uuid}
           method: get
           cors: true
   
@@ -45,6 +45,6 @@ functions:
     handler: handlers/updateuser.updateuser
     events:
       - http:
-          path: uam/{uuid}
+          path: /{poolid}/{uuid}
           method: put
           cors: true
